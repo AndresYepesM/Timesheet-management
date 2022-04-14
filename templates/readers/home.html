@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <div class="container-fluid">
+      <h1 class="navbar-brand text-light">Hospital</h1>
+      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon bg-light"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link text-light " aria-current="page" href="#">Botton 1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light " href="#">Botton 2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light " href="#">Botton 3</a>
+          </li>
+        </ul>
+      </div>
+      <div class="d-flex">
+        <a href="{% url 'login' %}" class="btn btn-success">Login</a>
+    </div>
+    </div>
+  </nav>
+
+{% endblock %}
