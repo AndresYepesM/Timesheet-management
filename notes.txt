@@ -1,0 +1,8 @@
+this is how to display time on django tempaltes:
+
+
+  {% now "SHORT_DATETIME_FORMAT" %}
+
+  {% now "jS F Y H:i" %}
+
+  It is {% now "D d M Y H:i:s" %}
