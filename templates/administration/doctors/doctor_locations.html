@@ -128,7 +128,7 @@
               <tbody>
                 {% if locations %}
                   {% for data in locations %}
-                    {% if data.isWest and user.doctor.isWest %}
+                    {% if data.isWest and user.doctor.isWest and data.isActive %}
                         <tr>
                             <td>{{data.name}}</td>
                             <td>{{data.address}}</td>

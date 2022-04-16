@@ -23,9 +23,11 @@ urlpatterns = [
 
     # Location urls
     # Location list works for both roles admin and doctor
-    path('doctors/location_availables', login_required(LocationList.as_view()), name='Location_list'),
+    path('location_availables/', login_required(LocationList.as_view()), name='Location_list'),
 
     path('location/create', login_required(LocatioCreate.as_view()), name='Location_create'),
 
-     re_path(r'^location/update/(?P<pk>\d+)$',login_required(UpdateLocation.as_view()), name='Location_update'),
+    re_path(r'^location/update/(?P<pk>\d+)$',login_required(UpdateLocation.as_view()), name='Location_update'),
+
+    
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

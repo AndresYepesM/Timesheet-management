@@ -10,12 +10,15 @@ from user import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    # Public access (Readers)
+    re_path('', include('reader.urls')),
+
     # Django authentication urls
     path('accounts/', include('django.contrib.auth.urls')), # Are you using Buit-in views as it is? I see you have password-reset used in login template. 
 
     # Users potal
-    re_path('hospital_aministration/', include('user.urls')),
+    re_path('administration/', include('user.urls')),
 
-    # Public access (Readers)
-    re_path('', include('reader.urls'))
+    # Timecard portal
+    re_path('administration/', include('workday.urls'))
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
