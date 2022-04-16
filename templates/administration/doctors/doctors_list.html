@@ -16,12 +16,10 @@
           {% if user.is_superuser %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Doctor options
+                More options
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="{% url 'Add_doctor' %}">Add a new doctor</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Locations available</a></li>
               </ul>
             </li>
           {% endif %}
@@ -44,35 +42,6 @@
       </div>
     </div>
   </nav>
-
-  {% if user.doctor.isDoctor %}
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h3>Locations available for you</h3>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Address</th>
-              </tr>
-              <tbody>
-                {% if Locations %}
-                  {% for data in Location %}
-                    <tr>
-                      <td>{{data.name}}</td>
-                    </tr>
-                  {% endfor %}
-                {% endif %}
-              </tbody>
-            </thead>
-          </table>
-        </div>
-      </div>
-    </div>
-
-  {% endif %}
 
   {% if user.is_superuser %}
 
