@@ -28,13 +28,6 @@ class DoctorsList(ListView):
     template_name = 'administration/doctors/doctors_list.html'
     context_object_name = 'doctors'
 
-
-class LocationList(ListView):
-    model = Location
-    template_name = 'administration/doctors/locations_list.html'
-    context_object_name = 'locations'
-
-
 class DoctorDetail(DetailView):
     model = Doctor
     template_name = 'administration/doctors/doctor_detail.html'
@@ -104,3 +97,25 @@ class UpdateDoctor(UpdateView):
             return HttpResponseRedirect(self.get_success_url())
         else:
             return HttpResponseRedirect(self.get_success_url())
+
+
+## Locations views
+# For both doctor role and super user
+class LocationList(ListView):
+    model = Location
+    template_name = 'administration/doctors/doctor_locations.html'
+    context_object_name = 'locations'
+
+
+class LocatioCreate(CreateView):
+    model = Location
+    form_class = NewLocation
+    template_name = 'administration/locations/location_create.html'
+    success_url = reverse_lazy('Location_list')
+
+
+class UpdateLocation(UpdateView):
+    model = Location
+    form_class = LocationUpdate
+    template_name = 'administration/locations/location_create.html'
+    success_url = reverse_lazy('Location_list')

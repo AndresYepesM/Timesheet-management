@@ -9,10 +9,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link text-light " aria-current="page" href="{% url 'Admin_main_page' %}">Main page</a>
-          </li>
-
           {% if user.is_superuser %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -23,6 +19,10 @@
               </ul>
             </li>
           {% endif %}
+
+          <li class="nav-item">
+            <a class="nav-link text-light " aria-current="page" href="{% url 'Admin_main_page' %}">Main page</a>
+          </li>
         </ul>
         <div class="d-flex" >
           <div class="dropdown">
@@ -69,7 +69,7 @@
                         <td>{{doctor.specialty}}</td>
                         <td>{{doctor.office_address}}</td>
                         <td>
-                          option1
+                          <a class="btn btn-secondary" href="{% url 'Update_doctor' pk=doctor.user.id %}">Update</a>
                         </td>
                       </tr>
                     {% endif %}
@@ -80,7 +80,9 @@
           </table>
         </div>
       </div>
+
       <div class="col-md-2"><!-- White space --></div>
+      
       <div class="col-md-5">
         <h3>Doctor available at the east sector.</h3>
         <div class="table-responsive">
@@ -103,7 +105,7 @@
                         <td>{{doctor.specialty}}</td>
                         <td>{{doctor.office_address}}</td>
                         <td>
-                          option1
+                          <a class="btn btn-secondary" href="{% url 'Update_doctor' pk=doctor.user.id %}">Update</a>
                         </td>
                       </tr>
                     {% endif %}

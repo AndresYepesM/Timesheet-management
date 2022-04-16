@@ -27,6 +27,7 @@ class Location(models.Model):
     name = models.CharField(max_length=125, verbose_name='Name of the location')
     isWest = models.BooleanField(blank=True, verbose_name='is from west?')
     isEast = models.BooleanField(blank=True, verbose_name='is from east?')
+    isActive = models.BooleanField(default=True, blank=True, null=True, verbose_name='still active?')
     address = models.CharField(max_length=125, verbose_name='Address of the location')
 
     class Meta:

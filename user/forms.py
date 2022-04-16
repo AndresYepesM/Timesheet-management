@@ -21,11 +21,6 @@ class NewUser(UserCreationForm):
             'email': 'Email address'
         }
 
-
-class InitialTrue(forms.CheckboxInput):
-    initial = True
-
-
 class NewDoctor(forms.ModelForm):
 
     class Meta:
@@ -59,11 +54,52 @@ class UpdateUser(forms.ModelForm):
         fields = [
             'first_name',
             'last_name',
-            'email'
+            'email',
+            'is_active'
         ]
 
         labels = {
             'first_name': 'First name',
             'last_name': 'Last name',
-            'email': 'Emaill address'
+            'email': 'Emaill address',
+            'is_active': 'this user is still active?',
+        }
+
+
+class NewLocation(forms.ModelForm):
+    class Meta:
+        model = Location
+
+        fields = [
+            'name',
+            'address',
+            'isWest',
+            'isEast'
+        ]
+
+        labels ={
+            'name': 'Name of the facility',
+            'address':'Address of the facility',
+            'isWest': 'the facility is at sector West?',
+            'isEast': 'the facility is at sector East?'
+        }
+
+class LocationUpdate(forms.ModelForm):
+    class Meta:
+        model = Location
+
+        fields = [
+            'name',
+            'address',
+            'isWest',
+            'isEast',
+            'isActive'
+        ]
+
+        labels ={
+            'name': 'Name of the facility',
+            'address':'Address of the facility',
+            'isWest': 'the facility is at sector West?',
+            'isEast': 'the facility is at sector East?',
+            'isActive': 'This facility is still active?'
         }

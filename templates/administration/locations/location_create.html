@@ -4,7 +4,7 @@
 
 {% block content %}
 
-
+{% if user.is_superuser %}
 
 <div class="sticky-top">
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
@@ -19,7 +19,7 @@
                 <a class="nav-link text-light " aria-current="page" href="{% url 'Admin_main_page' %}">Main page</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-light " aria-current="page" href="{% url 'Doctor_list' %}">Doctor list</a>
+                <a class="nav-link text-light " aria-current="page" href="{% url 'Location_list' %}">Locations list</a>
               </li>
             </ul>
             <div class="d-flex">
@@ -47,13 +47,11 @@
 		<div class="col col-md-12 col-lg-6">
 			<div class="card">
 				<div class="card-body">
-					<h2>Doctor information</h2>
-          <div id="emailHelp" class="form-text mb-2">all the inputs with * are required</div>
+					<h2>Facility's information</h2>
 
 					<form method="post">
 						{% csrf_token %}
 						{{ form|crispy }}
-            {{ form2|crispy }}
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>
 				</div>
@@ -62,4 +60,7 @@
 	</div>
 </div>
 
+{% else %}
+<h1 class="text-danger">you don't have authorization, please contact to your supervisor if is a mistake.</h1>
+{% endif %}
 {% endblock %}

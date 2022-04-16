@@ -9,22 +9,20 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link text-light " aria-current="page" href="{% url 'Admin_main_page' %}">Main page</a>
-          </li>
-
           {% if user.is_superuser %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Doctor options
+                More options
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="{% url 'Add_doctor' %}">Add a new doctor</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Locations available</a></li>
+                <li><a class="dropdown-item" href="{% url 'Location_create' %}">Add a new location</a></li>
               </ul>
             </li>
           {% endif %}
+
+          <li class="nav-item">
+            <a class="nav-link text-light " aria-current="page" href="{% url 'Admin_main_page' %}">Main page</a>
+          </li>
         </ul>
         <div class="d-flex" >
           <div class="dropdown">
@@ -44,6 +42,76 @@
       </div>
     </div>
   </nav>
+
+  {% if user.is_superuser %}
+
+  <div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col-md-5">
+        <h3>Facility's available at the west sector.</h3>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">name</th>
+                <th scope="col">address</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if locations%}
+                {% for data in locations %}
+                  {% if data.isWest and data.isActive%}
+                    <tr>
+                      <td>{{data.name}}</td>
+                        <td>{{data.address}}</td>
+                        <td>
+                          <a class="btn btn-secondary" href="{% url 'Location_update' pk=data.id%}">Update</a>
+                        </td>
+                      </tr>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="col-md-2"><!-- White space --></div>
+
+      <div class="col-md-5">
+        <h3>Facility's available at the east sector.</h3>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">name</th>
+                <th scope="col">address</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if locations%}
+                {% for data in locations %}
+                  {% if data.isEast %}
+                    <tr>
+                      <td>{{data.name}}</td>
+                      <td>{{data.address}}</td>
+                      <td>
+                        <a class="btn btn-secondary" href="#">Update</a>
+                      </td>
+                    </tr>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  {% endif %}
+
 
   {% if user.doctor.isDoctor %}
 
