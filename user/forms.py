@@ -1,3 +1,4 @@
+from multiprocessing.sharedctypes import Value
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -21,23 +22,33 @@ class NewUser(UserCreationForm):
         }
 
 
+class InitialTrue(forms.CheckboxInput):
+    initial = True
+
+
 class NewDoctor(forms.ModelForm):
 
     class Meta:
         model = Doctor
         fields = [
+            'isDoctor',
             'ssn',
             'home_address',
             'phone_num',
             'specialty',
             'office_address',
+            'isWest',
+            'isEast',
         ]
         labels = {
+            'isDoctor': 'Give the Doctor role.',
             'ssn': 'Social security number',
             'home_address': 'Personal address',
             'phone_num': 'Phone number',
             'specialty': 'Specialty',
-            'office_address': 'Offices address'
+            'office_address': 'Offices address',
+            'isWest': 'is from the sector West?',
+            'isEast': 'is from the sector East?'
         }
 
 

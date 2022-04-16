@@ -26,6 +26,13 @@ def AdministrationMainPage(request):
 class DoctorsList(ListView):
     model = Doctor
     template_name = 'administration/doctors/doctors_list.html'
+    context_object_name = 'doctors'
+
+
+class LocationList(ListView):
+    model = Location
+    template_name = 'administration/doctors/locations_list.html'
+    context_object_name = 'locations'
 
 
 class DoctorDetail(DetailView):
@@ -49,7 +56,6 @@ class CreateNewDoctor(CreateView):
         return context
 
     def post(self, request, *args, **kwargs):
-
         self.object = self.get_object
         form = self.form_class(request.POST)
         form2 = self.second_form_class(request.POST)

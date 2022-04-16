@@ -58,11 +58,20 @@
                 <th scope="col">Address</th>
               </tr>
               <tbody>
-                {% if Locations %}
-                  {% for data in Location %}
-                    <tr>
-                      <td>{{data.name}}</td>
-                    </tr>
+                {% if locations %}
+                  {% for data in locations %}
+                    {% if data.isWest and user.doctor.isWest %}
+                        <tr>
+                            <td>{{data.name}}</td>
+                            <td>{{data.address}}</td>
+                        </tr>
+                    {% endif %}
+                    {% if data.isEast and user.doctor.isEast %}
+                        <tr>
+                            <td>{{data.name}}</td>
+                            <td>{{data.address}}</td>
+                        </tr>
+                    {% endif %}
                   {% endfor %}
                 {% endif %}
               </tbody>
@@ -71,82 +80,6 @@
         </div>
       </div>
     </div>
-
-  {% endif %}
-
-  {% if user.is_superuser %}
-
-  <div class="container-fluid mt-5">
-    <div class="row">
-      <div class="col-md-5">
-        <h3>Doctor available at the west sector.</h3>
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Full name</th>
-                <th scope="col">Specialty</th>
-                <th scope="col">Office</th>
-                <th scope="col">Options</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% if doctors%}
-                {% for doctor in doctors %}
-                  {% if doctor.user.is_active %}
-                    {% if doctor.isWest %}
-                      <tr>
-                        <td><a href="{% url 'Doctor_detail' pk=doctor.user.id %}">{{doctor.user.first_name}} {{doctor.user.last_name}}</a></td>
-                        <td>{{doctor.specialty}}</td>
-                        <td>{{doctor.office_address}}</td>
-                        <td>
-                          option1
-                        </td>
-                      </tr>
-                    {% endif %}
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="col-md-2"><!-- White space --></div>
-      <div class="col-md-5">
-        <h3>Doctor available at the east sector.</h3>
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Full name</th>
-                <th scope="col">Specialty</th>
-                <th scope="col">Office</th>
-                <th scope="col">Options</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% if doctors%}
-                {% for doctor in doctors %}
-                  {% if doctor.user.is_active %}
-                    {% if doctor.isEast %}
-                      <tr>
-                        <td><a href="{% url 'Doctor_detail' pk=doctor.user.id %}">{{doctor.user.first_name}} {{doctor.user.last_name}}</a></td>
-                        <td>{{doctor.specialty}}</td>
-                        <td>{{doctor.office_address}}</td>
-                        <td>
-                          option1
-                        </td>
-                      </tr>
-                    {% endif %}
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
 
   {% endif %}
 {% endblock %}

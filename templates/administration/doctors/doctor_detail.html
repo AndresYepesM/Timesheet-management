@@ -42,6 +42,12 @@
             <div class="card">
                 <div class="card-header">
                   Doc. {{doctor.user.first_name}} {{doctor.user.last_name}}
+                  {% if doctor.isWest %}
+                  <h3 class="mt-3">Doctor is from sector West</h3>
+                  {% endif %}
+                  {% if doctor.isEast %}
+                  <h3 class="mt-3">Doctor is from sector East</h3>
+                  {% endif %}
                 </div>
                 <div class="card-body">
                     <div class="accordion" id="accordionExample">
