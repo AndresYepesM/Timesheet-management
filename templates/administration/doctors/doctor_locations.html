@@ -60,7 +60,7 @@
             <tbody>
               {% if locations%}
                 {% for data in locations %}
-                  {% if data.isWest and data.isActive%}
+                  {% if data.sector.zones == 1 and data.isActive%}
                     <tr>
                       <td>{{data.name}}</td>
                         <td>{{data.address}}</td>
@@ -91,7 +91,7 @@
             <tbody>
               {% if locations%}
                 {% for data in locations %}
-                  {% if data.isEast %}
+                  {% if data.sector.zones == 2 and data.isActive %}
                     <tr>
                       <td>{{data.name}}</td>
                       <td>{{data.address}}</td>
@@ -128,13 +128,13 @@
               <tbody>
                 {% if locations %}
                   {% for data in locations %}
-                    {% if data.isWest and user.doctor.isWest and data.isActive %}
+                    {% if data.sector.zones == 1 and user.doctor.sector.zones == 1 and data.isActive %}
                         <tr>
                             <td>{{data.name}}</td>
                             <td>{{data.address}}</td>
                         </tr>
                     {% endif %}
-                    {% if data.isEast and user.doctor.isEast %}
+                    {% if data.sector.zones == 2 and user.doctor.sector.zones == 2 and data.isActive %}
                         <tr>
                             <td>{{data.name}}</td>
                             <td>{{data.address}}</td>

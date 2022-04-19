@@ -63,7 +63,7 @@
               {% if doctors%}
                 {% for doctor in doctors %}
                   {% if doctor.user.is_active %}
-                    {% if doctor.isWest %}
+                    {% if doctor.sector.zones == 1 %}
                       <tr>
                         <td><a href="{% url 'Doctor_detail' pk=doctor.user.id %}">{{doctor.user.first_name}} {{doctor.user.last_name}}</a></td>
                         <td>{{doctor.specialty}}</td>
@@ -99,7 +99,7 @@
               {% if doctors%}
                 {% for doctor in doctors %}
                   {% if doctor.user.is_active %}
-                    {% if doctor.isEast %}
+                    {% if doctor.sector.zones == 2 %}
                       <tr>
                         <td><a href="{% url 'Doctor_detail' pk=doctor.user.id %}">{{doctor.user.first_name}} {{doctor.user.last_name}}</a></td>
                         <td>{{doctor.specialty}}</td>

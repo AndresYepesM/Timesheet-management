@@ -15,13 +15,12 @@ class ClockInOut(forms.ModelForm):
 
             'clock_out':TimeInput(),
 
-            'employee':forms.TextInput(attrs={'readonly':'readonly'})
         }
 
         fields = [
+            'employee',
             'clock_in',
             'clock_out',
-            'employee',
             'zone',
         ]
 
@@ -31,4 +30,3 @@ class ClockInOut(forms.ModelForm):
             'employee': 'select you account',
             'zone': 'which zone is',
         }
-    

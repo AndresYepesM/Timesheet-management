@@ -33,7 +33,6 @@ class NewWorkday(CreateView):
 
         context = super(NewWorkday, self).get_context_data(**kargs)
         current_user = self.request.user
-        print(current_user)
         if 'form' not in context:
             context['form'] = self.form_class(self.request.GET)
         return context
@@ -44,7 +43,8 @@ class NewWorkday(CreateView):
         form = self.form_class(request.POST)
         
         if form.is_valid():
-            form.instance.employee == self.current_user.username
+            form.fields.employee = current_user
             form.save()
-
             return HttpResponseRedirect(self.get_success_url())
+        else:
+            return self.render_to_response(self.get_context_data(form=form))

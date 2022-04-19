@@ -27,23 +27,21 @@ class NewDoctor(forms.ModelForm):
         model = Doctor
         fields = [
             'isDoctor',
+            'sector',
             'ssn',
             'home_address',
             'phone_num',
             'specialty',
             'office_address',
-            'isWest',
-            'isEast',
         ]
         labels = {
             'isDoctor': 'Give the Doctor role.',
+            'sector': 'Which sector is the new user?',
             'ssn': 'Social security number',
             'home_address': 'Personal address',
             'phone_num': 'Phone number',
             'specialty': 'Specialty',
             'office_address': 'Offices address',
-            'isWest': 'is from the sector West?',
-            'isEast': 'is from the sector East?'
         }
 
 
@@ -73,15 +71,11 @@ class NewLocation(forms.ModelForm):
         fields = [
             'name',
             'address',
-            'isWest',
-            'isEast'
         ]
 
         labels ={
             'name': 'Name of the facility',
             'address':'Address of the facility',
-            'isWest': 'the facility is at sector West?',
-            'isEast': 'the facility is at sector East?'
         }
 
 class LocationUpdate(forms.ModelForm):
@@ -91,15 +85,11 @@ class LocationUpdate(forms.ModelForm):
         fields = [
             'name',
             'address',
-            'isWest',
-            'isEast',
             'isActive'
         ]
 
         labels ={
             'name': 'Name of the facility',
             'address':'Address of the facility',
-            'isWest': 'the facility is at sector West?',
-            'isEast': 'the facility is at sector East?',
             'isActive': 'This facility is still active?'
         }
