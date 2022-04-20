@@ -7,6 +7,7 @@ class TimeInput(forms.TimeInput):
     input_type ='time'
 
 class ClockInOut(forms.ModelForm):
+    
     class Meta:
         model = Timecard
 

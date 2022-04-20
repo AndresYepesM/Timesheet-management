@@ -23,7 +23,7 @@ def Timecard_mainpage(request):
 
 class NewWorkday(CreateView):
     model = Timecard
-    second_model = Doctor
+    second_model = Location
     form_class = ClockInOut
     template_name = 'timesheet/clock_in_out.html'
     success_url = reverse_lazy('Timecard_main')
@@ -32,19 +32,35 @@ class NewWorkday(CreateView):
     def get_context_data(self, **kargs):
 
         context = super(NewWorkday, self).get_context_data(**kargs)
+        
         if 'form' not in context:
             context['form'] = self.form_class(self.request.GET)
         return context
+    
+    def get_form(self, *args, **kwargs):
+
+        form = super(NewWorkday, self).get_form(*args, **kwargs)
+
+        if form.is_bound == False:
+            current_zone = self.request.user.doctor.sector
+            locations =  self.second_model.objects.filter(sector = current_zone, isActive=True)
+            form.fields['zone'].queryset = locations
+        return form
 
     def post(self, request, *args, **kwargs):
 
         self.object=self.get_object
         current_user = self.request.user.doctor
+
         form = self.form_class(request.POST)
-        
+
         if form.is_valid():
             form.instance.employee = current_user
             form.save()
             return HttpResponseRedirect(self.get_success_url())
         else:
             return self.render_to_response(self.get_context_data(form=form))
+
+
+        
+        
