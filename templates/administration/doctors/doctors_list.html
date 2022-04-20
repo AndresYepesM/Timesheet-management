@@ -44,7 +44,6 @@
   </nav>
 
   {% if user.is_superuser %}
-
   <div class="container-fluid mt-5">
     <div class="row">
       <div class="col-md-5">
@@ -69,7 +68,7 @@
                         <td>{{doctor.specialty}}</td>
                         <td>{{doctor.office_address}}</td>
                         <td>
-                          <a class="btn btn-secondary" href="{% url 'Update_doctor' pk=doctor.user.id %}">Update</a>
+                          <a style="border-radius: 50px 50px 50px 50px;" class="btn btn-secondary" href="{% url 'Update_doctor' pk=doctor.user.id %}">Update</a>
                         </td>
                       </tr>
                     {% endif %}
@@ -105,7 +104,7 @@
                         <td>{{doctor.specialty}}</td>
                         <td>{{doctor.office_address}}</td>
                         <td>
-                          <a class="btn btn-secondary" href="{% url 'Update_doctor' pk=doctor.user.id %}">Update</a>
+                          <a style="border-radius: 50px 50px 50px 50px;" class="btn btn-secondary" href="{% url 'Update_doctor' pk=doctor.user.id %}">Update</a>
                         </td>
                       </tr>
                     {% endif %}

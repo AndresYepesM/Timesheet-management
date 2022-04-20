@@ -71,11 +71,13 @@ class NewLocation(forms.ModelForm):
         fields = [
             'name',
             'address',
+            'sector',
         ]
 
         labels ={
             'name': 'Name of the facility',
             'address':'Address of the facility',
+            'sector': 'Which sector is this facility?',
         }
 
 class LocationUpdate(forms.ModelForm):
@@ -85,7 +87,7 @@ class LocationUpdate(forms.ModelForm):
         fields = [
             'name',
             'address',
-            'isActive'
+            'isActive',
         ]
 
         labels ={

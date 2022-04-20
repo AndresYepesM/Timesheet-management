@@ -18,7 +18,6 @@ class ClockInOut(forms.ModelForm):
         }
 
         fields = [
-            'employee',
             'clock_in',
             'clock_out',
             'zone',
@@ -27,6 +26,6 @@ class ClockInOut(forms.ModelForm):
         labels = {
             'clock_in': 'Click to clock in',
             'clocl_out': 'Click to clock out',
-            'employee': 'select you account',
             'zone': 'which zone is',
         }
+

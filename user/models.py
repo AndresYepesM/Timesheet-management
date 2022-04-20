@@ -36,6 +36,7 @@ class Doctor(models.Model):
     phone_num = models.CharField(max_length=15, verbose_name='Phone number')
     specialty = models.CharField(max_length=65, verbose_name='Specialty fo the doctor')
     office_address = models.CharField(max_length=150, verbose_name='Office address')
+
     sector = models.ForeignKey(Sector, on_delete=models.CASCADE)
 
     class Meta:

@@ -64,8 +64,9 @@
             <form method="post">
                 {% csrf_token %}
                 {{ form|crispy }}
-        
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="d-grid gap-2">
+                  <button style="border-radius: 50px 50px 50px 50px;" type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </form> 
           </div>
       </div>
