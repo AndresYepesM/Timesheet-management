@@ -81,7 +81,7 @@ class UpdateDoctor(UpdateView):
             context['form'] = self.form_class
         if 'form2' not in context:
             context['form2'] = self.second_form_class(instance=doctor)
-        context['id'] = pk
+            context['id'] = pk
         return context
 
     def post(self, request, *args, **kwargs):

@@ -6,27 +6,42 @@ from django.contrib.auth.models import User
 class TimeInput(forms.TimeInput):
     input_type ='time'
 
-class ClockInOut(forms.ModelForm):
+class ClockIn(forms.ModelForm):
     
     class Meta:
         model = Timecard
 
-        widgets={
-            'clock_in': TimeInput(), 
-
-            'clock_out':TimeInput(),
-
-        }
+        widgets={'clock_in': TimeInput()}
 
         fields = [
             'clock_in',
-            'clock_out',
             'zone',
         ]
 
         labels = {
             'clock_in': 'Click to clock in',
-            'clocl_out': 'Click to clock out',
             'zone': 'which zone is',
         }
 
+
+class ClockOut(forms.ModelForm):
+    
+    class Meta:
+        model = Timecard
+
+        widgets = {
+            'clock_out': TimeInput(),
+            'zone': forms.TextInput(attrs={'readonly':'readonly'})
+        }
+
+        fields = [
+            'clock_out',
+            'clock_in',
+            'zone',
+        ]
+
+        labels = {
+            'clock_out': 'Click to clock out',
+            'clock_in': 'Your clock in time',
+            'zone': 'You work today at',
+        }

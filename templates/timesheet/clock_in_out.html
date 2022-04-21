@@ -17,11 +17,7 @@
 
           {% if user.doctor.isDoctor %}
             <li class="nav-item">
-              <a class="nav-link text-light " aria-current="page" href="#">Timesheet</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link text-light " aria-current="page" href="#">Clock in/out</a>
+              <a class="nav-link text-light " aria-current="page" href="{% url 'Timecard_main' %}">Timecard</a>
             </li>
           {% endif %}
           <li class="nav-item">
@@ -52,7 +48,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                      Welcome again,
+                      Today is, {% now "jS F Y" %}
                     </div>
                     <div class="card-body">
                         <div class="fs-1" id="clock" onload="currentTime()"></div>
