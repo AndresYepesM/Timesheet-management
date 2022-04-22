@@ -14,6 +14,9 @@ from user.models import Doctor, Location, Sector
 
 # Create your views here.
 
+# Clock in Clock out mehtods
+###################################
+
 @login_required(login_url='/accounts/login')
 def TodayActivity(request, pk):
     cu = request.user.doctor
@@ -25,9 +28,12 @@ def TodayActivity(request, pk):
     }
     return render(request, 'timesheet/activity.html', context)
 
+
+
 @login_required(login_url='/accounts/login')
 def SuccessMsg(request):
     return render(request, 'timesheet/success.html')
+
 
 
 class ClockInMethod(CreateView):
@@ -71,3 +77,14 @@ class ClockOutMethod(UpdateView):
     template_name = 'timesheet/clock_in_out.html'
     success_url = reverse_lazy('success_request')
 
+
+# Administration Logs and updates logs 
+###################################
+
+class LogTimecard(ListView):
+    model = Timecard
+    template_name = 'administration/timesheet/timesheet_log.html'
+    context_object_name = 'logs'
+
+    def search_bar(self, request):
+        pass
