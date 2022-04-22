@@ -16,9 +16,7 @@
           {% endif %}
 
           {% if user.doctor.isDoctor %}
-            <li class="nav-item">
-              <a class="nav-link text-light " aria-current="page" href="{% url 'Timecard_main' %}">Timecard</a>
-            </li>
+          
           {% endif %}
           <li class="nav-item">
             <a class="nav-link text-light " aria-current="page" href="{% url 'Admin_main_page' %}">Main page</a>
@@ -58,16 +56,20 @@
             </div>
           <div class="col-md-6">
             <form method="post">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <div class="d-grid gap-2">
-                  <button style="border-radius: 50px 50px 50px 50px;" type="submit" class="btn btn-primary">Submit</button>
-                </div>
+              <label for="">You work at</label>
+              <input class="form-control mb-3" type="text" placeholder="{{timecard.zone.name}}" aria-label="Disabled input example" disabled>
+              {% csrf_token %}
+              {{ form|crispy }}
+                
+              <div class="d-grid gap-2">
+                <button style="border-radius: 50px 50px 50px 50px;" value="Random Number!" onclick="Random();" type="submit" class="btn btn-primary">Submit</button>
+              </div>
             </form> 
           </div>
       </div>
   </div>
 
+  <script src="/static/js/auto_slug.js"></script>
   <script src="/static/js/clock.js"></script>
 {% endblock %}
 

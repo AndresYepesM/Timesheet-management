@@ -8,17 +8,22 @@ from django.contrib.auth.decorators import login_required
 from django.views import generic
 from datetime import date
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-from workday.models import *
+from workday.models import Timecard
 from workday.forms import *
-from user.models import *
+from user.models import Doctor, Location, Sector
 
 # Create your views here.
 
-
 @login_required(login_url='/accounts/login')
-def Timecard_mainpage(request):
-
-    return render(request, 'timesheet/user_timecard.html')
+def TodayActivity(request, pk):
+    cu = request.user.doctor
+    current_date = date.today()
+    context = {
+        'employee': Doctor.objects.get(user_id=pk),
+        'timecard': Timecard.objects.filter(employee=cu, workday=current_date),
+        'today': date.today()
+    }
+    return render(request, 'timesheet/activity.html', context)
 
 
 class ClockInMethod(CreateView):
@@ -26,14 +31,10 @@ class ClockInMethod(CreateView):
     second_model = Location
     form_class = ClockIn
     template_name = 'timesheet/clock_in_out.html'
-    success_url = reverse_lazy('Timecard_main')
+    success_url = reverse_lazy('Admin_main_page')
     
     def get_context_data(self, **kargs):
         context = super(ClockInMethod, self).get_context_data(**kargs)
-
-        current_date = self.request.user
-        print(current_date)
-
         if 'form' not in context:
             context['form'] = self.form_class(self.request.GET)
         return context
@@ -65,25 +66,5 @@ class ClockOutMethod(UpdateView):
     second_model = Location
     form_class = ClockOut
     template_name = 'timesheet/clock_in_out.html'
-    success_url = reverse_lazy('Timecard_main')
+    success_url = reverse_lazy('Admin_main_page')
 
-    def get_context_data(self, **kwargs):
-
-        context = super(ClockOutMethod, self).get_context_data(**kwargs)
-        pk = self.kwargs.get(employee = self.request.user.id)
-        current_date = date.today()
-        timecard = self.model.objects.get(employee=pk, workday=current_date)
-        if 'form' not in context:
-            context['form']=self.form_class(instance=timecard)
-        return context
-
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object
-        id_timecard = kwargs['pk']
-        timecard = self.model.objects.get(employee=pk, workday=current_date)
-        form = self.form_class(request.POST, instance=timecard)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(self.get_success_url())
-        else:
-            return HttpResponseRedirect(self.get_success_url())

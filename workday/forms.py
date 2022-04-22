@@ -11,9 +11,13 @@ class ClockIn(forms.ModelForm):
     class Meta:
         model = Timecard
 
-        widgets={'clock_in': TimeInput()}
+        widgets={
+            'clock_in': TimeInput(),
+            'slug': forms.NumberInput(attrs={'readonly':'readonly'})
+        }
 
         fields = [
+            'slug',
             'clock_in',
             'zone',
         ]
@@ -21,6 +25,7 @@ class ClockIn(forms.ModelForm):
         labels = {
             'clock_in': 'Click to clock in',
             'zone': 'which zone is',
+            'slug':' '
         }
 
 
@@ -31,17 +36,15 @@ class ClockOut(forms.ModelForm):
 
         widgets = {
             'clock_out': TimeInput(),
-            'zone': forms.TextInput(attrs={'readonly':'readonly'})
+            'clock_in':forms.TimeInput(attrs={'readonly':'readonly'})
         }
 
         fields = [
-            'clock_out',
             'clock_in',
-            'zone',
+            'clock_out',
         ]
 
         labels = {
             'clock_out': 'Click to clock out',
             'clock_in': 'Your clock in time',
-            'zone': 'You work today at',
         }

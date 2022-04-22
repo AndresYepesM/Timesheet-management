@@ -16,7 +16,7 @@
 
           {% if user.doctor.isDoctor %}
             <li class="nav-item">
-              <a class="nav-link text-light " aria-current="page" href="{% url 'Timecard_main' %}">Timesheet</a>
+              <a class="nav-link text-light " aria-current="page" href="#">Timesheet</a>
             </li>
           {% endif %}
           <li class="nav-item">
@@ -52,7 +52,7 @@
 
           <div class="card-body">
             <div class="fs-1" id="clock" onload="currentTime()"></div>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            {{user.doctor}}
           </div>
         </div>
       </div>
@@ -63,10 +63,18 @@
         </div>
 
         <div class="card-body">
-          <div class="d-grid gap-2">
-            <a style="border-radius: 50px 50px 50px 50px;" class="btn btn-primary" href="{% url 'Clock_in'%}">Clock in</a>
-            <a style="border-radius: 50px 50px 50px 50px;" class="btn btn-primary" href="{% url 'Clock_out' pk=user.id %}">Clock out</a>
-          </div>
+            <div class="d-grid gap-2">
+              {% if timecard %}
+                {% for data in timecard %}
+                  {% if data.workday == today and data.clock_out %}
+                  {% else %}
+                  <a style="border-radius: 50px 50px 50px 50px;" class="btn btn-primary" href="{% url 'Clock_out' slug=data.slug %}">Clock out</a>  
+                  {% endif %}
+                {% endfor %}
+              {% else %}
+                <a style="border-radius: 50px 50px 50px 50px;" class="btn btn-primary" href="{% url 'Clock_in' %}">Clock in</a> 
+              {% endif %}
+            </div>
         </div>
       </div>
       </div>

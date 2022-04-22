@@ -79,6 +79,7 @@ class UpdateDoctor(UpdateView):
         doctor = self.second_model.objects.get(ssn=user.doctor.ssn)
         if 'form' not in context:
             context['form'] = self.form_class
+            context['id'] = pk
         if 'form2' not in context:
             context['form2'] = self.second_form_class(instance=doctor)
             context['id'] = pk

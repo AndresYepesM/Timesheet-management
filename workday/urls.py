@@ -7,11 +7,10 @@ from django.contrib.auth.decorators import login_required
 from workday.views import *
 
 urlpatterns = [
+    re_path(r'^timecard/activity/(?P<pk>\d+)$',TodayActivity, name='activity'),
 
-    path('timecard/', Timecard_mainpage, name='Timecard_main'),
+    path('timecard/clock_in/', login_required(ClockInMethod.as_view()), name='Clock_in'),
 
-    path('clock_in/', login_required(ClockInMethod.as_view()), name='Clock_in'),
-
-    re_path(r'^clock_out/(?P<pk>\d+)$',login_required(ClockOutMethod.as_view()), name='Clock_out'),
+    re_path(r'^timecard/clock_out/(?P<slug>\d+)$',login_required(ClockOutMethod.as_view()), name='Clock_out'),
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
