@@ -1,7 +1,5 @@
 {% extends 'index.html' %}
-{% load crispy_forms_tags %}
 {% block content %}
-
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
     <div class="container-fluid">
       <h1 class="navbar-brand text-light">Administration main page</h1>
@@ -10,9 +8,29 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          {% if user.is_superuser %}
           <li class="nav-item">
-            <a class="nav-link text-light " aria-current="page" href="{% url 'Admin_main_page' %}">Main page</a>
+            <a class="nav-link text-light " aria-current="page" href="{% url 'Doctor_list' %}">Doctor's list</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link text-light " aria-current="page" href="{% url 'Location_list' %}">Locations list</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light " aria-current="page" href="#">Time cards list</a>
+          </li>
+          {% endif %}
+
+          {% if user.doctor.isDoctor %}
+          <li class="nav-item">
+            <a class="nav-link text-light " aria-current="page" href="{% url 'Location_list' %}">Locations</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-light " aria-current="page" href="{% url 'activity' pk=user.id%}">Time card's</a>
+          </li>
+
+          {% endif %}
         </ul>
         <div class="d-flex" >
           <div class="dropdown">
@@ -33,37 +51,8 @@
     </div>
   </nav>
 
-    <div class="container-fluid mt-5">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                      Today is, {% now "jS F Y" %}
-                    </div>
-                    <div class="card-body">
-                        <div class="fs-1" id="clock" onload="currentTime()"></div>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                  </div>
-            </div>
-          <div class="col-md-6">
-            <form method="post">
-              {% if timecard.clock_in %}
-                <label for="">You work at</label>
-                <input class="form-control mb-3" type="text" placeholder="{{timecard.zone.name}}" aria-label="Disabled input example" disabled>
-              {% endif %}
-              {% csrf_token %}
-              {{ form|crispy }}
-                
-              <div class="d-grid gap-2">
-                <button style="border-radius: 50px 50px 50px 50px;" value="Random Number!" onclick="Random();" type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form> 
-          </div>
-      </div>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Request Success</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
-
-  <script src="/static/js/auto_slug.js"></script>
-  <script src="/static/js/clock.js"></script>
 {% endblock %}
-

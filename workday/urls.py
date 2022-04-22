@@ -11,6 +11,8 @@ urlpatterns = [
 
     path('timecard/clock_in/', login_required(ClockInMethod.as_view()), name='Clock_in'),
 
+    path('success/', SuccessMsg, name='success_request'),
+
     re_path(r'^timecard/clock_out/(?P<slug>\d+)$',login_required(ClockOutMethod.as_view()), name='Clock_out'),
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

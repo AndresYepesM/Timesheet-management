@@ -16,7 +16,7 @@
 
           {% if user.doctor.isDoctor %}
             <li class="nav-item">
-              <a class="nav-link text-light " aria-current="page" href="#">Timesheet</a>
+              <a class="nav-link text-light " aria-current="page" href="#">Workday list</a>
             </li>
           {% endif %}
           <li class="nav-item">
@@ -47,40 +47,39 @@
       <div class="col-md-6">
         <div class="card">
           <div class="card-header">
-            Welcome again, {% now "jS F Y" %}
+            Welcome again, today is {% now "jS F Y" %}
           </div>
 
           <div class="card-body">
             <div class="fs-1" id="clock" onload="currentTime()"></div>
-            {{user.doctor}}
           </div>
         </div>
       </div>
 
       <div class="col-md-6">
-        <div class="card-header">
-          What you want to do?
-        </div>
-
-        <div class="card-body">
+        <div class="card">
+          <div class="card-header">
+            What you want to do?
+          </div>
+  
+          <div class="card-body">
             <div class="d-grid gap-2">
               {% if timecard %}
                 {% for data in timecard %}
                   {% if data.workday == today and data.clock_out %}
+                  <p>You're set for today, have a nice day.</p>
                   {% else %}
-                  <a style="border-radius: 50px 50px 50px 50px;" class="btn btn-primary" href="{% url 'Clock_out' slug=data.slug %}">Clock out</a>  
+                    <a style="border-radius: 50px 50px 50px 50px;" class="btn btn-primary" href="{% url 'Clock_out' slug=data.slug %}">Clock out</a>  
                   {% endif %}
                 {% endfor %}
               {% else %}
                 <a style="border-radius: 50px 50px 50px 50px;" class="btn btn-primary" href="{% url 'Clock_in' %}">Clock in</a> 
               {% endif %}
             </div>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   </div>
-
-
   <script src="/static/js/clock.js"></script>
 {% endblock %}

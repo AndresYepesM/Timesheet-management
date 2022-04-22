@@ -25,13 +25,17 @@ def TodayActivity(request, pk):
     }
     return render(request, 'timesheet/activity.html', context)
 
+@login_required(login_url='/accounts/login')
+def SuccessMsg(request):
+    return render(request, 'timesheet/success.html')
+
 
 class ClockInMethod(CreateView):
     model = Timecard
     second_model = Location
     form_class = ClockIn
     template_name = 'timesheet/clock_in_out.html'
-    success_url = reverse_lazy('Admin_main_page')
+    success_url = reverse_lazy('success_request')
     
     def get_context_data(self, **kargs):
         context = super(ClockInMethod, self).get_context_data(**kargs)
@@ -50,7 +54,6 @@ class ClockInMethod(CreateView):
     def post(self, request, *args, **kwargs):
         self.object=self.get_object
         current_user = self.request.user.doctor
-
         form = self.form_class(request.POST)
 
         if form.is_valid():
@@ -66,5 +69,5 @@ class ClockOutMethod(UpdateView):
     second_model = Location
     form_class = ClockOut
     template_name = 'timesheet/clock_in_out.html'
-    success_url = reverse_lazy('Admin_main_page')
+    success_url = reverse_lazy('success_request')
 

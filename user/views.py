@@ -38,7 +38,7 @@ class CreateNewDoctor(CreateView):
     template_name = 'administration/doctors/new_doctor.html'
     form_class = NewUser
     second_form_class = NewDoctor
-    success_url = reverse_lazy('Doctor_list')
+    success_url = reverse_lazy('success_request')
 
     def get_context_data(self, **kargs):
         context = super(CreateNewDoctor, self).get_context_data(**kargs)
@@ -70,7 +70,7 @@ class UpdateDoctor(UpdateView):
     template_name = 'administration/doctors/new_doctor.html'
     form_class = UpdateUser
     second_form_class = NewDoctor
-    success_url = reverse_lazy('Doctor_list')
+    success_url = reverse_lazy('success_request')
 
     def get_context_data(self, **kwargs):
         context = super(UpdateDoctor, self).get_context_data(**kwargs)

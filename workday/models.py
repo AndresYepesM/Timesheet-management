@@ -17,6 +17,6 @@ class Timecard(models.Model):
         verbose_name_plural = 'Timecards'
 
     def __str__(self):
-        return f'{self.slug} {self.workday} {self.employee.user.first_name}'
+        return f'Workday:  {self.workday} ----- Employee: {self.employee.user.first_name} {self.employee.user.last_name}'
 
     
